@@ -10,6 +10,10 @@ import traceback
 from collections import deque
 from datetime import datetime as dt
 import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 WAIT_TIME = 10
 PASSWORD = os.environ["UT_PASS"]
