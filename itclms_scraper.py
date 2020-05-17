@@ -58,6 +58,7 @@ def scrape():
             else:
                 lecture_ids.append(lecture_id)
 
+        # LMS課題取り出し
         lecture_infos = deque([])
         for lecture_id in lecture_ids:
             driver.get(
@@ -128,7 +129,7 @@ def submit_check(lecture_infos):
     assignments = deque([(dt.now(), "現在時刻", "==================")])
     for lecture_info in lecture_infos:
         lecture_name = lecture_info["name"]
-        # 提出可能な課題を検索する
+        # 未提出で提出可能な課題を検索する
         for report_info in lecture_info["report_infos"]:
             if report_info["submit_status"] == "未提出" and report_info["edit"]:
                 time_end = report_info["time_end"]
@@ -154,5 +155,3 @@ if __name__ == "__main__":
     for assignment in assignments:
         print(assignment)
     print(to_text(assignments))
-    # google_task(lecture_infos)
-    # google_task(None)
