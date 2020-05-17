@@ -49,10 +49,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="うんこ"))
     lecture_infos = itclms_scraper.scrape()
     assignments = itclms_scraper.submit_check(lecture_infos)
     text = itclms_scraper.to_text(assignments)
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
 
 if __name__ == "__main__":
