@@ -56,7 +56,8 @@ def handle_message(event):
     lecture_infos = itclms_scraper.scrape()
     assignments = itclms_scraper.submit_check(lecture_infos)
     text = itclms_scraper.to_text(assignments)
-    line_bot_api.push_message(YOUR_LINE_ID, messages=text)
+    line_bot_api.push_message(YOUR_LINE_ID,
+                              messages=TextSendMessage(text=text))
 
 
 if __name__ == "__main__":
