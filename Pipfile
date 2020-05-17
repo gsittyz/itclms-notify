@@ -13,6 +13,7 @@ flask = "*"
 line-bot-sdk = "*"
 selenium = "*"
 chromedriver-binary = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
