@@ -19,6 +19,7 @@ app = Flask(__name__)
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["LINE_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["LINE_SECRET"]
+YOUR_LINE_ID = os.environ["LINE_ID"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -51,10 +52,11 @@ def callback():
 def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="待ってね"))
     lecture_infos = itclms_scraper.scrape()
     assignments = itclms_scraper.submit_check(lecture_infos)
     text = itclms_scraper.to_text(assignments)
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
+    line_bot_api.push_message(YOUR_LINE_ID, messages=text)
 
 
 if __name__ == "__main__":
